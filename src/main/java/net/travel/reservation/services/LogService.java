@@ -5,6 +5,7 @@ package net.travel.reservation.services;
 import lombok.RequiredArgsConstructor;
 import net.travel.reservation.entites.Log;
 
+import net.travel.reservation.entites.User;
 import net.travel.reservation.repositories.LogRepository;
 import org.springframework.stereotype.Service;
 
@@ -57,12 +58,12 @@ public class LogService {
 
     // Chercher les logs d'un utilisateur
     public List<Log> getLogsByUtilisateur(
-            String utilisateur
+            User utilisateur
     ) {
 
 
         return logRepository
-                .findByUtilisateur(utilisateur);
+                .findByUser(utilisateur);
     }
 
 

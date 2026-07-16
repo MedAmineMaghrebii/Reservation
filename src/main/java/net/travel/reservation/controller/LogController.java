@@ -3,6 +3,7 @@ package net.travel.reservation.controller;
 
 import lombok.RequiredArgsConstructor;
 import net.travel.reservation.entites.Log;
+import net.travel.reservation.entites.User;
 import net.travel.reservation.services.LogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,7 +74,7 @@ public class LogController {
     // Logs par utilisateur
     @GetMapping("/utilisateur/{utilisateur}")
     public ResponseEntity<List<Log>> getLogsByUtilisateur(
-            @PathVariable String utilisateur) {
+            @PathVariable User utilisateur) {
 
 
         return ResponseEntity.ok(
