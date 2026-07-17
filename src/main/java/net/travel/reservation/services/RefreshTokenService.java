@@ -5,6 +5,7 @@ import net.travel.reservation.entites.RefreshToken;
 import net.travel.reservation.entites.User;
 import net.travel.reservation.repositories.RefreshTokenRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -18,6 +19,7 @@ public class RefreshTokenService {
     /**
      * Créer un nouveau Refresh Token
      */
+    @Transactional
     public RefreshToken createRefreshToken(User user) {
 
         // Un seul Refresh Token par utilisateur

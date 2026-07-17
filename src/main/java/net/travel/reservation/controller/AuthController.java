@@ -10,9 +10,12 @@ import net.travel.reservation.dto.*;
 
 import net.travel.reservation.services.AuthService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 
 
 @RestController
@@ -41,14 +44,26 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(
+    public ResponseEntity<?> login(
             @Valid @RequestBody LoginRequest request
-    ){
+    ) {
 
-        return ResponseEntity.ok(
-                authService.login(request)
-        );
+        try {
 
+            return ResponseEntity.ok(
+                    authService.login(request)
+            );
+
+        } catch (BadCredentialsException e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(
+                            Map.of(
+                                    "message", "Invalid email or password"
+                            )
+                    );
+        }
     }
 
 
