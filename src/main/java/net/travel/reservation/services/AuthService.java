@@ -1,6 +1,5 @@
 package net.travel.reservation.services;
-
-
+import net.travel.reservation.entites.Role;  // ← Explicit import FIRST
 import lombok.RequiredArgsConstructor;
 import net.travel.reservation.dto.*;
 import net.travel.reservation.entites.*;
@@ -10,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import org.springframework.stereotype.Service;
 
 
@@ -86,30 +84,15 @@ public class AuthService {
 
         authenticationManager.authenticate(
 
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
 
         );
-
-
-
         User user =
-                userRepository.findByEmail(
-                                request.getEmail()
-                        )
-                        .orElseThrow();
-
-
-
+                userRepository.findByEmail(request.getEmail()).orElseThrow();
         String accessToken =
                 jwtService.generateToken(
                         user.getEmail()
                 );
-
-
-
         RefreshToken refreshToken =
                 refreshTokenService
                         .createRefreshToken(user);
@@ -121,7 +104,9 @@ public class AuthService {
                 .refreshToken(refreshToken.getToken())
                 .userId(user.getUserId())
                 .email(user.getEmail())
+                .role(user.getRole())
                 .build();
+
 
     }
 

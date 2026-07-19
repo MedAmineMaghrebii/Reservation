@@ -20,7 +20,10 @@ public class RegisterRequest {
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
-
+    @Pattern(
+            regexp = "^[0-9]{8}$",
+            message = "Phone must contain only numbers (8 digits)"
+    )
     private String firstName;
 
     private String lastName;
@@ -28,5 +31,6 @@ public class RegisterRequest {
             regexp = "^[0-9]{8}$",
             message = "Phone must contain only numbers (8 digits)"
     )
+    @NotBlank(message = "Phone is required")
     private String phone;
 }

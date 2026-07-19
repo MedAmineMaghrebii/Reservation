@@ -41,7 +41,7 @@ public class ReservationController {
 
 
     // Ajouter une réservation
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Reservation> createReservation(
             @RequestBody Reservation reservation) {
 

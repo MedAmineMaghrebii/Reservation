@@ -1,6 +1,6 @@
 package net.travel.reservation.entites;
 
-public enum Role {
+public enum Role{
 
     USER,
     ADMIN

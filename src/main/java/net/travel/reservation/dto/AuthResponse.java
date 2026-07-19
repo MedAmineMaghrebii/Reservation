@@ -1,6 +1,8 @@
 package net.travel.reservation.dto;
 
 import lombok.*;
+import net.travel.reservation.entites.Role;
+
 
 @Getter
 @Setter
@@ -13,9 +15,13 @@ public class AuthResponse {
 
     private String refreshToken;
 
+
     private String tokenType = "Bearer";
 
     private Long userId;
 
     private String email;
+
+    private Role role;
+
 }
